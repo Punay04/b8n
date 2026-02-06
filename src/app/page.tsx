@@ -20,6 +20,14 @@ export default function Home() {
     }),
   );
 
+  const testAi = useMutation(
+    trpc.testAi.mutationOptions({
+      onSuccess: (data) => {
+        toast.success("AI Job queued");
+      },
+    }),
+  );
+
   return (
     <div className=" flex justify-center items-center min-h-screen">
       <div className="flex flex-col gap-5">
@@ -31,6 +39,10 @@ export default function Home() {
 
         <Button disabled={create.isPending} onClick={() => create.mutate()}>
           Create
+        </Button>
+
+        <Button disabled={testAi.isPending} onClick={() => testAi.mutate()}>
+          Test ai
         </Button>
       </div>
     </div>
