@@ -24,6 +24,8 @@ import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { authClient } from "@/lib/auth-client";
 import { toast } from "sonner";
+import { GithubIcon } from "lucide-react";
+import Image from "next/image";
 
 const loginSchema = z.object({
   email: z.email("Please enter a valid email address"),
@@ -65,7 +67,7 @@ const LoginForm = () => {
 
   return (
     <div className="flex flex-col gap-6">
-      <Card>
+      <Card className="">
         <CardContent>
           <CardHeader className="text-center">
             <CardTitle>Welcome Back</CardTitle>
@@ -83,6 +85,12 @@ const LoginForm = () => {
                   type="button"
                   disabled={isPending}
                 >
+                  <Image
+                    src={"/images/github.svg"}
+                    alt="Github"
+                    height={20}
+                    width={20}
+                  />
                   Continue with Github
                 </Button>
                 <Button
@@ -91,6 +99,12 @@ const LoginForm = () => {
                   type="button"
                   disabled={isPending}
                 >
+                  <Image
+                    src={"/images/google.svg"}
+                    alt="Google"
+                    height={20}
+                    width={20}
+                  />
                   Continue with Google
                 </Button>
               </div>

@@ -1,10 +1,38 @@
-import { requireAuth } from "@/lib/auth-utils";
-import { caller } from "@/trpc/server";
+"use client";
 
-export default async function Home() {
-  await requireAuth();
+import { Button } from "@/components/ui/button";
+import { useTRPC } from "@/trpc/client";
+import { ToastRoot } from "@base-ui/react";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
 
-  const data = await caller.getUsers();
+export default function Home() {
+  const trpc = useTRPC();
+  const querClient = useQueryClient();
 
-  return <div className="text-red-500">{JSON.stringify(data)}</div>;
+  const { data } = useQuery(trpc.getWorkflows.queryOptions());
+
+  const create = useMutation(
+    trpc.createWorkflow.mutationOptions({
+      onSuccess: () => {
+        toast.success("Job queued");
+      },
+    }),
+  );
+
+  return (
+    <div className=" flex justify-center items-center min-h-screen">
+      <div className="flex flex-col gap-5">
+        <p className="text-center">
+          {data?.map((d) => (
+            <p>{d.name}</p>
+          ))}
+        </p>
+
+        <Button disabled={create.isPending} onClick={() => create.mutate()}>
+          Create
+        </Button>
+      </div>
+    </div>
+  );
 }
