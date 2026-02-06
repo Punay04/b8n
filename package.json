@@ -2,6 +2,7 @@
   "name": "b8n",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -19,6 +20,7 @@
     "@trpc/server": "^11.9.0",
     "@trpc/tanstack-react-query": "^11.9.0",
     "@types/pg": "^8.16.0",
+    "better-auth": "^1.4.18",
     "class-variance-authority": "^0.7.1",
     "client-only": "^0.0.1",
     "clsx": "^2.1.1",
